@@ -2,18 +2,27 @@ import React from "react";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
-  light: state,
+  counter: state,
 });
+
 
 const mapDispatchToProps = (dispatch) => ({
-  onChange: () => dispatch({ type: "SWITCH" }),
+    incrementByOne: () => dispatch({ type: "INCREMENT" }),
+    decrementByOne: () => dispatch({ type: "DECREMENT" }),
+    incrementByTen: () => dispatch({ type: "INCREMENT10" }),
+    decrementByTen: () => dispatch({ type: "DECREMENT10" }),
+    reset: () => dispatch({type: "RESET"}),
 });
 
-const countComponent = ({ count, onChange }) => (
+const CounterComponent = ({ counter, incrementByOne, decrementByOne, incrementByTen, decrementByTen, reset }) => (
   <div>
-    <p>{count}</p>
-    <button onClick={onChange}>switch</button>
+    <p>{counter}</p>
+    <button onClick={incrementByOne}>Increment by One</button>
+    <button onClick={decrementByOne}>Decrement by One</button>
+    <button onClick={incrementByTen}>Increment by Ten</button>
+    <button onClick={decrementByTen}>Decrement by Ten</button>
+    <button onClick={reset}>Reset to Zero</button>
   </div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(countComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CounterComponent);
